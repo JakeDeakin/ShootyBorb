@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject player;
+    private int playerScore;
+    private int playerHighScore;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +18,28 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void PlayerDeath()
+    {
+        PauseGame();
+    }
+
+    private void PauseGame()
+    {
+
+    }
+    
+    private void UpdateScore()
+    {
+        playerScore++;
+    }
+
+    private void UpdateHighScore()
+    {
+        if (playerScore > playerHighScore)
+        {
+            playerHighScore = playerScore;
+        }
     }
 }
