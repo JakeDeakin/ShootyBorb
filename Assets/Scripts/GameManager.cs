@@ -7,7 +7,10 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     private int playerScore;
     private int playerHighScore;
-    
+
+    public List<GameObject> boolits = new List<GameObject>();
+    public UIController uic;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,16 +26,25 @@ public class GameManager : MonoBehaviour
     public void PlayerDeath()
     {
         PauseGame();
+
     }
 
     private void PauseGame()
     {
+        Time.timeScale = 0;
+        uic.ShowPauseMenu();
+    }
+
+    private void ResumeGame()
+    {
 
     }
     
-    private void UpdateScore()
+    public void UpdateScore()
     {
         playerScore++;
+        UpdateHighScore();
+        uic.UpdateHUD(playerHighScore, playerScore);
     }
 
     private void UpdateHighScore()

@@ -14,11 +14,11 @@ GameObject:
   - component: {fileID: -3322938953528333364}
   m_Layer: 0
   m_Name: Boolit
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3619122553991988938
 Transform:
   m_ObjectHideFlags: 0

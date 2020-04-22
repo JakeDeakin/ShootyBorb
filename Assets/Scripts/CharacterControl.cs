@@ -7,15 +7,16 @@ public class CharacterControl  : MonoBehaviour
     private GameManager gm;
     public GameObject projectile;
     public GameObject boolitSpawn;
-    private List<GameObject> boolits = new List<GameObject>() ;
-    public float fireRate;
+   // public List<GameObject> boolits = new List<GameObject>();
+    public int fireRate;
     private bool canShoot = true;
+    public float movementSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
         gm = FindObjectOfType<GameManager>();
-        //InstantiateBoolits();
+        InstantiateBoolits(fireRate * 10);
     }
 
     // Update is called once per frame
@@ -29,18 +30,29 @@ public class CharacterControl  : MonoBehaviour
     {
         if (Input.GetButton("Horizontal"))
         {
-
+            this.transform.Translate(new Vector3(Input.GetAxis("Horizontal"), 0) * Time.deltaTime * movementSpeed); ;
         }
     }
 
 
     private void PlayerShoot()
     {
-        if (canShoot)
+        
+        if (canShoot && fireRate > 0)
         {
             canShoot = false;
-            Instantiate(projectile, boolitSpawn.transform.position, boolitSpawn.transform.rotation);
-            StartCoroutine(ShootWait(1/fireRate));
+            if (gm.boolits.Count == 0)
+            {
+                InstantiateBoolits(1);
+            }
+
+            if (gm.boolits.Count > 0)
+            {
+                gm.boolits[0].transform.position = boolitSpawn.transform.position;
+                gm.boolits[0].SetActive(true);
+                StartCoroutine(ShootWait(1 / fireRate));
+                gm.boolits.RemoveAt(0);
+            }
         }
     }
 
@@ -57,15 +69,14 @@ public class CharacterControl  : MonoBehaviour
         gm.PlayerDeath();
     }
 
-    private void InstantiateBoolits()
+    private void InstantiateBoolits(int num)
     {
         
-        for (int i = 0; i < fireRate * 10; i++)
+        for (int i = 0; i < num; i++)
         {
             GameObject boolit = Instantiate(projectile, boolitSpawn.transform.position, boolitSpawn.transform.rotation);
-            boolits.Add(boolit);
+            gm.boolits.Add(boolit);
             boolit.SetActive(false);
-            
         }  
     }
 }
