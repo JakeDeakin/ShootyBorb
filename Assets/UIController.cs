@@ -47,7 +47,7 @@ public class UIController : MonoBehaviour
 
     public void HidePauseMenu()
     {
-
+        pauseMenu.gameObject.SetActive(false);
     }
 
     public void UpdatePauseMenuScore()

@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public List<GameObject> boolits = new List<GameObject>();
     public UIController uic;
 
+    private bool paused;
+    private bool freezeControls;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +23,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetButtonDown("Fire1") && paused && !freezeControls)
+        {
+            Respawn();
+        }
     }
 
     public void PlayerDeath()
@@ -33,11 +39,27 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         uic.ShowPauseMenu();
+        paused = true;
+        freezeControls = true;
+        StartCoroutine(DeathWait(0.5F));
     }
 
     private void ResumeGame()
     {
+        Time.timeScale = 1;
+        paused = false;
+    }
 
+    private void Respawn()
+    {
+        ResetGame();
+    }
+
+    private void ResetGame()
+    {
+        paused = false;
+        Time.timeScale = 1;
+        uic.HidePauseMenu();
     }
     
     public void UpdateScore()
@@ -53,5 +75,11 @@ public class GameManager : MonoBehaviour
         {
             playerHighScore = playerScore;
         }
+    }
+
+    IEnumerator DeathWait(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        freezeControls = false;
     }
 }
