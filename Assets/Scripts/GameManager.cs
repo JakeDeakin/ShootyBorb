@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     private int playerHighScore;
 
     public List<GameObject> boolits = new List<GameObject>();
+    public List<GameObject> borlSpawns = new List<GameObject>();
+
     public UIController uic;
 
     private bool paused;
@@ -17,7 +19,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetAllBorlSpawns();
     }
 
     // Update is called once per frame
@@ -81,5 +83,16 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(time);
         freezeControls = false;
+    }
+
+    private void GetAllBorlSpawns()
+    {
+        foreach (GameObject spawn in FindObjectsOfType<GameObject>())
+        {
+            if (spawn.CompareTag("BorlSpawn"))
+            {
+                borlSpawns.Add(spawn);
+            }
+        }
     }
 }
