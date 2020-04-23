@@ -16,6 +16,14 @@ public class GameManager : MonoBehaviour
     private bool paused;
     private bool freezeControls;
 
+    public List<GameObject> availableBorls = new List<GameObject>();
+
+    public List<GameObject> currentBorls = new List<GameObject>();
+    public List<GameObject> previousWave = new List<GameObject>();
+    public List<GameObject> nextWave = new List<GameObject>();
+
+    public List<GameObject> borlSizes = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -94,5 +102,57 @@ public class GameManager : MonoBehaviour
                 borlSpawns.Add(spawn);
             }
         }
+    }
+
+    private void InitializeWave()
+    {
+
+    }
+    private List<GameObject> NextWave()
+    {
+        int wavecount = previousWave.Count;
+        GameObject secondlast = null;
+        GameObject last = null;
+        int slsize;
+        int lsize;
+        
+
+        if (wavecount == 0)
+        {
+            nextWave.Add(availableBorls[0]);
+            return nextWave;
+        }
+
+        if (wavecount > 2)
+        {
+            secondlast = previousWave[wavecount - 2];
+            last = previousWave[wavecount - 1];
+            slsize = secondlast.GetComponent<ObstacleController>().borlSize;
+            lsize = last.GetComponent<ObstacleController>().borlSize;
+
+            if (slsize == lsize)
+            {
+                for (int i = 0; i<previousWave.Count - 2; i++)
+                {
+                    nextWave.Add(previousWave[i]);
+                    previousWave[i].SetActive(true);
+                }
+                nextWave.Add(availableBorls[lsize + 2]);
+                return nextWave;
+            }
+
+            if (slsize != lsize)
+            {
+                for (int i = 0; i < previousWave.Count; i++)
+                {
+                    nextWave.Add(previousWave[i]);
+                    previousWave[i].SetActive(true);
+                    nextWave.Add(availableBorls[0]);
+                }
+                return nextWave;
+            }
+        }
+
+        return null;
     }
 }

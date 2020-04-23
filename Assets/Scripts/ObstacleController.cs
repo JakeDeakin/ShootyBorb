@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObstacleController : MonoBehaviour
 {
     private GameManager gm;
+    public int borlSize;
     // Start is called before the first frame update
     void Start()
     {
