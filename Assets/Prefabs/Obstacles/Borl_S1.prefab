@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 548688334691214710}
   - component: {fileID: 7160610675602319810}
   - component: {fileID: -6544785396245206506}
-  - component: {fileID: 4597077764944925451}
+  - component: {fileID: 664542944078533485}
   m_Layer: 0
   m_Name: Borl_S1
   m_TagString: Untagged
@@ -118,7 +118,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &4597077764944925451
+--- !u!58 &664542944078533485
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

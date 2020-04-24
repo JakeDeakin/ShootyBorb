@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
         NextWave();
         GrabBorl();
         InitializeWave();
+        
     }
 
     // Update is called once per frame
@@ -45,7 +46,6 @@ public class GameManager : MonoBehaviour
     public void PlayerDeath()
     {
         PauseGame();
-
     }
 
     private void PauseGame()
@@ -117,21 +117,26 @@ public class GameManager : MonoBehaviour
     }
     private List<GameObject> NextWave()
     {
+        
+
+        previousWave = new List<GameObject>(nextWave);
+        nextWave.Clear();
         int wavecount = previousWave.Count;
         GameObject secondlast = null;
         GameObject last = null;
         int slsize;
         int lsize;
         
-
         if (wavecount == 0)
         {
+            print("Previous wave didn't exist.");
             nextWave.Add(borlSizes[0]);
             return nextWave;
         }
 
         if (wavecount == 1)
         {
+            print("previous wave only had 1 enemy");
             nextWave.Add(previousWave[0]);
             nextWave.Add(borlSizes[0]);
             return nextWave;
@@ -139,6 +144,7 @@ public class GameManager : MonoBehaviour
 
         if (wavecount >= 2)
         {
+            print("Previous wave had 2 or more enemies");
             secondlast = previousWave[wavecount - 2];
             last = previousWave[wavecount - 1];
             slsize = secondlast.GetComponent<ObstacleController>().borlSize;
@@ -206,4 +212,20 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    public void CheckCurrentBorls()
+    {
+        if (currentBorls.Count == 0)
+        {
+            BeginNextWave();
+        }
+    }
+
+    private void BeginNextWave()
+    {
+        previousWave = nextWave;
+        NextWave();
+        GrabBorl();
+        InitializeWave();
+    }   
 }

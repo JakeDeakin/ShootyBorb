@@ -35,6 +35,9 @@ public class ObstacleController : MonoBehaviour
     private void obstacleHit()
     {
         this.gameObject.SetActive(false);
+        gm.currentBorls.Remove(this.gameObject);
+        gm.reserveBorls.Add(this.gameObject);
+        gm.CheckCurrentBorls();
     }
 
     private void Split()
