@@ -900,9 +900,7 @@ MonoBehaviour:
   borlSpawns: []
   uic: {fileID: 796797912}
   currentBorls: []
-  previousWave:
-  - {fileID: 174606319749487814, guid: 87a5d3f42c34a6d48ad7a50871e6909d, type: 3}
-  - {fileID: 5731922581469936081, guid: fc347eaebc26c3446aaa3692a9377ccd, type: 3}
+  previousWave: []
   nextWave: []
   borlSizes:
   - {fileID: 548688334691214711, guid: b06353a9a69005143a3f30663e12afd1, type: 3}

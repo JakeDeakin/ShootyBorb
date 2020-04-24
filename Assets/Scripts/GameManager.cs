@@ -174,7 +174,10 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject b in borlSizes)
         {
-            for (int i = 0; i < 4; i++)
+            float maxnum = Mathf.Pow(2, borlSizes.Count - (1 + borlSizes.IndexOf(b)));
+            int a = (int)maxnum;
+
+            for (int i = 0; i < a; i++)
             {
                 GameObject temp = Instantiate(b);
                 temp.SetActive(false);
