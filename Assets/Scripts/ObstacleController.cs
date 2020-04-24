@@ -37,4 +37,11 @@ public class ObstacleController : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
+    private void Split()
+    {
+        if (borlSize > 1)
+        {
+            
+        }
+    }
 }

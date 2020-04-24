@@ -16,18 +16,20 @@ public class GameManager : MonoBehaviour
     private bool paused;
     private bool freezeControls;
 
-    public List<GameObject> availableBorls = new List<GameObject>();
-
     public List<GameObject> currentBorls = new List<GameObject>();
     public List<GameObject> previousWave = new List<GameObject>();
     public List<GameObject> nextWave = new List<GameObject>();
 
     public List<GameObject> borlSizes = new List<GameObject>();
+    public List<GameObject> reserveBorls = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
         GetAllBorlSpawns();
+        CreateAllBorls();
+        NextWave();
+        GrabBorl();
     }
 
     // Update is called once per frame
@@ -119,11 +121,18 @@ public class GameManager : MonoBehaviour
 
         if (wavecount == 0)
         {
-            nextWave.Add(availableBorls[0]);
+            nextWave.Add(borlSizes[0]);
             return nextWave;
         }
 
-        if (wavecount > 2)
+        if (wavecount == 1)
+        {
+            nextWave.Add(previousWave[0]);
+            nextWave.Add(borlSizes[0]);
+            return nextWave;
+        }
+
+        if (wavecount >= 2)
         {
             secondlast = previousWave[wavecount - 2];
             last = previousWave[wavecount - 1];
@@ -137,7 +146,7 @@ public class GameManager : MonoBehaviour
                     nextWave.Add(previousWave[i]);
                     previousWave[i].SetActive(true);
                 }
-                nextWave.Add(availableBorls[lsize + 2]);
+                nextWave.Add(borlSizes[lsize]);
                 return nextWave;
             }
 
@@ -147,12 +156,46 @@ public class GameManager : MonoBehaviour
                 {
                     nextWave.Add(previousWave[i]);
                     previousWave[i].SetActive(true);
-                    nextWave.Add(availableBorls[0]);
                 }
+                nextWave.Add(borlSizes[0]);
                 return nextWave;
             }
         }
 
         return null;
+    }
+
+    private void CreateBorl(int size)
+    {
+        Instantiate(borlSizes[size - 1], borlSpawns[0].transform);
+    }
+
+    private void CreateAllBorls()
+    {
+        foreach (GameObject b in borlSizes)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                GameObject temp = Instantiate(b);
+                temp.SetActive(false);
+                reserveBorls.Add(temp);
+            }
+        }
+    }
+
+    private void GrabBorl()
+    {
+        foreach (GameObject b in nextWave)
+        {
+            foreach (GameObject bo in reserveBorls)
+            {
+                if (bo.GetComponent<ObstacleController>().borlSize == b.GetComponent<ObstacleController>().borlSize)
+                {
+                    currentBorls.Add(bo);
+                    reserveBorls.Remove(bo);
+                    break;
+                }
+            }
+        }
     }
 }
