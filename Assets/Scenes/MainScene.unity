@@ -506,12 +506,12 @@ PrefabInstance:
     - target: {fileID: 5870044009472718899, guid: 19c865b4efbdc874597ff54a48b3e54e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5870044009472718899, guid: 19c865b4efbdc874597ff54a48b3e54e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.57
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 5870044009472718899, guid: 19c865b4efbdc874597ff54a48b3e54e,
         type: 3}
@@ -601,7 +601,7 @@ PrefabInstance:
     - target: {fileID: 5870044009472718902, guid: 19c865b4efbdc874597ff54a48b3e54e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19c865b4efbdc874597ff54a48b3e54e, type: 3}
@@ -900,7 +900,10 @@ MonoBehaviour:
   borlSpawns: []
   uic: {fileID: 796797912}
   currentBorls: []
-  previousWave: []
+  previousWave:
+  - {fileID: 5731922581469936081, guid: fc347eaebc26c3446aaa3692a9377ccd, type: 3}
+  - {fileID: 2901104175803534548, guid: 39cc35ea01dd1194da6606659e7a195a, type: 3}
+  - {fileID: 548688334691214711, guid: b06353a9a69005143a3f30663e12afd1, type: 3}
   nextWave: []
   borlSizes:
   - {fileID: 548688334691214711, guid: b06353a9a69005143a3f30663e12afd1, type: 3}

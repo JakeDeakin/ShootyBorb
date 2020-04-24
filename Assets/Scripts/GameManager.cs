@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         CreateAllBorls();
         NextWave();
         GrabBorl();
+        InitializeWave();
     }
 
     // Update is called once per frame
@@ -108,7 +109,11 @@ public class GameManager : MonoBehaviour
 
     private void InitializeWave()
     {
-
+        foreach (GameObject g in currentBorls)
+        {
+            g.SetActive(true);
+            g.transform.position = borlSpawns[currentBorls.IndexOf(g)].transform.position;
+        }
     }
     private List<GameObject> NextWave()
     {
