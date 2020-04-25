@@ -105,13 +105,15 @@ public class GameManager : MonoBehaviour
                 borlSpawns.Add(spawn);
             }
         }
+        Shuffle<GameObject>(borlSpawns);
     }
 
     private void InitializeWave()
     {
+        Shuffle<GameObject>(borlSpawns);
         foreach (GameObject g in currentBorls)
         {
-            g.SetActive(true);
+            g.SetActive(true);   
             g.transform.position = borlSpawns[currentBorls.IndexOf(g)].transform.position;
         }
     }
@@ -191,7 +193,7 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < a; i++)
             {
                 GameObject temp = Instantiate(b);
-                temp.SetActive(false);
+                temp.SetActive(false); 
                 reserveBorls.Add(temp);
             }
         }
@@ -227,5 +229,21 @@ public class GameManager : MonoBehaviour
         NextWave();
         GrabBorl();
         InitializeWave();
-    }   
+    }
+
+
+    public void Shuffle<T>(List<T> list)
+    {
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = Random.Range(0, n + 1);
+
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
+    }
+
 }
