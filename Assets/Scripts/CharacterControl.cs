@@ -30,7 +30,22 @@ public class CharacterControl  : MonoBehaviour
     {
         if (Input.GetButton("Horizontal"))
         {
-            this.transform.Translate(new Vector3(Input.GetAxis("Horizontal"), 0) * Time.deltaTime * movementSpeed); ;
+            this.transform.Translate(new Vector3(Input.GetAxis("Horizontal"), 0) * Time.deltaTime * movementSpeed); 
+        }
+
+
+
+        if (Input.GetButton("Fire1"))
+        {
+            if (Input.mousePosition.x < Screen.width / 2)
+            {
+                this.transform.Translate(new Vector3(-1, 0) * Time.deltaTime * movementSpeed);
+            }
+
+            if (Input.mousePosition.x > Screen.width / 2)
+            {
+                this.transform.Translate(new Vector3(1, 0) * Time.deltaTime * movementSpeed);
+            }
         }
     }
 
