@@ -26,12 +26,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         GetAllBorlSpawns();
         CreateAllBorls();
         NextWave();
         GrabBorl();
         InitializeWave();
-        
+        uic.HidePauseMenu();
     }
 
     // Update is called once per frame
@@ -57,11 +58,6 @@ public class GameManager : MonoBehaviour
         StartCoroutine(DeathWait(0.5F));
     }
 
-    private void ResumeGame()
-    {
-        Time.timeScale = 1;
-        paused = false;
-    }
 
     private void Respawn()
     {
