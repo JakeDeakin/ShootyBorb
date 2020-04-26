@@ -33,8 +33,6 @@ public class CharacterControl  : MonoBehaviour
             this.transform.Translate(new Vector3(Input.GetAxis("Horizontal"), 0) * Time.deltaTime * movementSpeed); 
         }
 
-
-
         if (Input.GetButton("Fire1"))
         {
             if (Input.mousePosition.x < Screen.width / 2)
@@ -48,7 +46,6 @@ public class CharacterControl  : MonoBehaviour
             }
         }
     }
-
 
     private void PlayerShoot()
     {
@@ -65,7 +62,7 @@ public class CharacterControl  : MonoBehaviour
             {
                 gm.boolits[0].transform.position = boolitSpawn.transform.position;
                 gm.boolits[0].SetActive(true);
-                StartCoroutine(ShootWait(1 / fireRate));
+                StartCoroutine(ShootWait(1f / (float)fireRate));
                 gm.boolits.RemoveAt(0);
             }
         }
