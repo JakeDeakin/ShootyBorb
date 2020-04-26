@@ -17,6 +17,8 @@ public class UIController : MonoBehaviour
 
     public Text pmPlayerScore;
     public Text pmPlayerHighScore;
+
+    public GameObject winScreen;
     
     // Start is called before the first frame update
     void Start()

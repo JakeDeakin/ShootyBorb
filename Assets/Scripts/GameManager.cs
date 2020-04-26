@@ -143,10 +143,20 @@ public class GameManager : MonoBehaviour
 
         if (wavecount == 1)
         {
+            if (previousWave[0].GetComponent<ObstacleController>().borlSize < 5)
+            {
+
             print("previous wave only had 1 enemy");
             nextWave.Add(previousWave[0]);
             nextWave.Add(borlSizes[0]);
             return nextWave;
+            }
+
+            else
+            {
+                PlayerWins();
+            }
+
         }
 
         if (wavecount >= 2)
@@ -251,4 +261,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void PlayerWins()
+    {
+        uic.winScreen.SetActive(true);
+        player.GetComponent<CharacterControl>().fireRate = 50;
+
+    }
 }
