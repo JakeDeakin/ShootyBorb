@@ -48,6 +48,7 @@ public class ObstacleController : MonoBehaviour
     {
         if (borlSize > 1)
         {
+            int a = -1;
             for (int i = 0; i < 2; i++)
             {
                 foreach (GameObject bo in gm.reserveBorls)
@@ -58,6 +59,9 @@ public class ObstacleController : MonoBehaviour
                         gm.reserveBorls.Remove(bo);
                         bo.SetActive(true);
                         bo.transform.position = splitSpawns[i].transform.position;
+
+                        bo.GetComponent<Rigidbody2D>().AddForce(new Vector2 (a * 20f, a * 20f));
+                        a = 1;
                         break;
                     }
                 }

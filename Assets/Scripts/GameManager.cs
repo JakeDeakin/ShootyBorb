@@ -72,7 +72,18 @@ public class GameManager : MonoBehaviour
     {
         paused = false;
         Time.timeScale = 1;
+        foreach (GameObject o in currentBorls)
+        {
+            o.SetActive(false);
+            reserveBorls.Add(o);
+        }
+        currentBorls.Clear();
+        nextWave.Clear();
+        
         uic.HidePauseMenu();
+        BeginNextWave();
+        playerScore = -1;
+        UpdateScore();
     }
     
     public void UpdateScore()
@@ -119,8 +130,6 @@ public class GameManager : MonoBehaviour
     }
     private List<GameObject> NextWave()
     {
-        
-
         previousWave = new List<GameObject>(nextWave);
         nextWave.Clear();
         int wavecount = previousWave.Count;
